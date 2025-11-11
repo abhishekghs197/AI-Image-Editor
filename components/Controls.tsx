@@ -5,6 +5,7 @@ import PromptSuggestions from './PromptSuggestions';
 import StylePresets from './StylePresets';
 import QuickActions from './QuickActions';
 import HistoryPanel from './HistoryPanel';
+import FramePresets from './FramePresets';
 import { HistoryItem } from '../types';
 
 interface ControlsProps {
@@ -16,6 +17,7 @@ interface ControlsProps {
   onTransparent: () => void;
   onUpscale: () => void;
   onBlurBackground: () => void;
+  onApplyFrame: (prompt: string) => void;
   isLoading: boolean;
   history: HistoryItem[];
   onHistoryClick: (item: HistoryItem) => void;
@@ -30,6 +32,7 @@ const Controls: React.FC<ControlsProps> = ({
   onTransparent,
   onUpscale,
   onBlurBackground,
+  onApplyFrame,
   isLoading,
   history,
   onHistoryClick,
@@ -103,6 +106,7 @@ const Controls: React.FC<ControlsProps> = ({
           disabled={isLoading}
         />
         <StylePresets onPresetClick={handlePresetClick} disabled={isLoading} />
+        <FramePresets onFrameClick={onApplyFrame} disabled={isLoading} />
         <PromptSuggestions onSuggestionClick={handleSuggestionClick} disabled={isLoading} />
         <HistoryPanel history={history} onHistoryClick={onHistoryClick} disabled={isLoading} />
       </div>

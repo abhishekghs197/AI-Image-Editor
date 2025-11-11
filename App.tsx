@@ -84,6 +84,7 @@ function App() {
   const handleTransparent = () => runQuickAction('Make the background of the image transparent. Output as a PNG.');
   const handleUpscale = () => runQuickAction('Upscale the image to 2x its original resolution, significantly enhancing details, sharpness, and overall quality for a professional, high-definition result.');
   const handleBlurBackground = () => runQuickAction('Apply a subtle, photorealistic blur to the background, keeping the main subject in sharp focus (bokeh effect).');
+  const handleApplyFrame = (framePrompt: string) => runQuickAction(framePrompt);
 
 
   return (
@@ -123,6 +124,7 @@ function App() {
                 onTransparent={handleTransparent}
                 onUpscale={handleUpscale}
                 onBlurBackground={handleBlurBackground}
+                onApplyFrame={handleApplyFrame}
                 isLoading={isLoading}
                 history={history}
                 onHistoryClick={handleHistoryClick}
