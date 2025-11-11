@@ -2,11 +2,18 @@ import React from 'react';
 import OrnateFrameIcon from './icons/OrnateFrameIcon';
 import MinimalistFrameIcon from './icons/MinimalistFrameIcon';
 import VintageFrameIcon from './icons/VintageFrameIcon';
+import OrnateSilverFrameIcon from './icons/OrnateSilverFrameIcon';
+import RusticWoodFrameIcon from './icons/RusticWoodFrameIcon';
+import ModernGeometricFrameIcon from './icons/ModernGeometricFrameIcon';
+
 
 const presets = [
-  { name: 'Ornate', prompt: 'Add a highly detailed, ornate gold frame around the entire image.', icon: <OrnateFrameIcon className="w-6 h-6" /> },
+  { name: 'Ornate Gold', prompt: 'Add a highly detailed, ornate gold frame around the entire image.', icon: <OrnateFrameIcon className="w-6 h-6" /> },
+  { name: 'Ornate Silver', prompt: 'Add a highly detailed, ornate silver frame around the entire image.', icon: <OrnateSilverFrameIcon className="w-6 h-6" /> },
   { name: 'Minimalist', prompt: 'Add a thin, minimalist black border frame around the entire image.', icon: <MinimalistFrameIcon className="w-6 h-6" /> },
-  { name: 'Vintage', prompt: 'Add a vintage dark wood frame around the entire image.', icon: <VintageFrameIcon className="w-6 h-6" /> },
+  { name: 'Vintage Wood', prompt: 'Add a vintage dark wood frame around the entire image.', icon: <VintageFrameIcon className="w-6 h-6" /> },
+  { name: 'Rustic Wood', prompt: 'Add a rustic, weathered wood frame around the entire image.', icon: <RusticWoodFrameIcon className="w-6 h-6" /> },
+  { name: 'Geometric', prompt: 'Add a modern, geometric pattern frame with clean lines around the entire image.', icon: <ModernGeometricFrameIcon className="w-6 h-6" /> },
 ];
 
 interface FramePresetsProps {
