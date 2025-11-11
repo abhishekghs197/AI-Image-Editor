@@ -40,6 +40,14 @@ const ImageDisplay: React.FC<ImageDisplayProps> = ({ originalImage, editedImage,
   
   const commonButtonClass = "p-2 bg-slate-900/50 rounded-full text-white hover:bg-indigo-600/80 backdrop-blur-sm transition-colors duration-200";
 
+  const ErrorState = () => (
+    <div className="text-center text-red-400 flex flex-col items-center justify-center p-4 h-full">
+        <ErrorIcon className="w-12 h-12 mb-2" />
+        <p className="text-lg font-semibold">Generation Failed</p>
+        <p className="text-sm text-slate-400 mt-1">{error}</p>
+    </div>
+  );
+
   return (
     <div className="w-full relative">
         {/* View Mode Toggle */}
@@ -74,8 +82,11 @@ const ImageDisplay: React.FC<ImageDisplayProps> = ({ originalImage, editedImage,
           </div>
           <div className="w-full md:w-1/2 p-2">
             <div className="relative aspect-square bg-slate-800 rounded-xl overflow-hidden border-2 border-slate-700 shadow-lg flex items-center justify-center">
-              {isLoading && <Loader prompt={prompt} />}
-              {!isLoading && editedImage && (
+              {isLoading ? (
+                <Loader prompt={prompt} />
+              ) : error ? (
+                <ErrorState />
+              ) : editedImage ? (
                 <ZoomableImage src={editedImageUrl} alt="Edited">
                   <div className="absolute top-2 right-2 z-10">
                     <button onClick={handleDownload} className={commonButtonClass} aria-label="Download edited image" title="Download edited image">
@@ -83,15 +94,7 @@ const ImageDisplay: React.FC<ImageDisplayProps> = ({ originalImage, editedImage,
                     </button>
                   </div>
                 </ZoomableImage>
-              )}
-              {!isLoading && !editedImage && error && (
-                <div className="text-center text-red-400 flex flex-col items-center justify-center p-4">
-                    <ErrorIcon className="w-12 h-12 mb-2" />
-                    <p className="text-lg font-semibold">Generation Failed</p>
-                    <p className="text-sm text-slate-400 mt-1">{error}</p>
-                </div>
-              )}
-              {!isLoading && !editedImage && !error && (
+              ) : (
                  <div className="text-center text-slate-400 p-4">
                     <p className="text-lg font-semibold">Your edited image will appear here.</p>
                 </div>
@@ -104,15 +107,11 @@ const ImageDisplay: React.FC<ImageDisplayProps> = ({ originalImage, editedImage,
         // Slider View
         <div className="w-full p-2">
           <div className="relative aspect-square bg-slate-800 rounded-xl overflow-hidden border-2 border-slate-700 shadow-lg flex items-center justify-center">
-            {isLoading && <Loader prompt={prompt} />}
-            {!isLoading && error && (
-              <div className="text-center text-red-400 flex flex-col items-center justify-center p-4">
-                  <ErrorIcon className="w-12 h-12 mb-2" />
-                  <p className="text-lg font-semibold">Generation Failed</p>
-                  <p className="text-sm text-slate-400 mt-1">{error}</p>
-              </div>
-            )}
-            {!isLoading && !error && (
+            {isLoading ? (
+                <Loader prompt={prompt} />
+            ) : error ? (
+                <ErrorState />
+            ) : (
               <>
                 <ReactCompareSlider
                   itemOne={<ReactCompareSliderImage src={originalImageUrl} alt="Original" />}
@@ -126,13 +125,13 @@ const ImageDisplay: React.FC<ImageDisplayProps> = ({ originalImage, editedImage,
                         </button>
                     </div>
                  )}
+                 {!editedImage && (
+                   <div className="absolute inset-0 flex items-center justify-center text-center text-slate-400 p-4 pointer-events-none">
+                      <p className="text-lg font-semibold bg-slate-900/50 p-2 rounded-lg">Your edited image will appear here.</p>
+                  </div>
+                )}
               </>
             )}
-             {!isLoading && !editedImage && !error && (
-                 <div className="absolute inset-0 flex items-center justify-center text-center text-slate-400 p-4 pointer-events-none">
-                    <p className="text-lg font-semibold bg-slate-900/50 p-2 rounded-lg">Your edited image will appear here.</p>
-                </div>
-              )}
           </div>
         </div>
       )}
