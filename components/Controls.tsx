@@ -2,10 +2,10 @@ import React from 'react';
 import SparklesIcon from './icons/SparklesIcon';
 import ResetIcon from './icons/ResetIcon';
 import PromptSuggestions from './PromptSuggestions';
-import StylePresets from './StylePresets';
 import QuickActions from './QuickActions';
 import HistoryPanel from './HistoryPanel';
 import FramePresets from './FramePresets';
+import ArtisticFilters from './ArtisticFilters';
 import { HistoryItem } from '../types';
 
 interface ControlsProps {
@@ -18,6 +18,7 @@ interface ControlsProps {
   onUpscale: () => void;
   onBlurBackground: () => void;
   onApplyFrame: (prompt: string) => void;
+  onApplyFilter: (prompt: string) => void;
   isLoading: boolean;
   history: HistoryItem[];
   onHistoryClick: (item: HistoryItem) => void;
@@ -33,6 +34,7 @@ const Controls: React.FC<ControlsProps> = ({
   onUpscale,
   onBlurBackground,
   onApplyFrame,
+  onApplyFilter,
   isLoading,
   history,
   onHistoryClick,
@@ -40,10 +42,6 @@ const Controls: React.FC<ControlsProps> = ({
   
   const handleSuggestionClick = (suggestion: string) => {
     setPrompt(suggestion);
-  };
-  
-  const handlePresetClick = (presetPrompt: string) => {
-    setPrompt(prev => prev ? `${prev}, ${presetPrompt}` : presetPrompt);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -105,7 +103,7 @@ const Controls: React.FC<ControlsProps> = ({
           onBlurBackground={onBlurBackground}
           disabled={isLoading}
         />
-        <StylePresets onPresetClick={handlePresetClick} disabled={isLoading} />
+        <ArtisticFilters onFilterClick={onApplyFilter} disabled={isLoading} />
         <FramePresets onFrameClick={onApplyFrame} disabled={isLoading} />
         <PromptSuggestions onSuggestionClick={handleSuggestionClick} disabled={isLoading} />
         <HistoryPanel history={history} onHistoryClick={onHistoryClick} disabled={isLoading} />

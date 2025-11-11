@@ -85,6 +85,7 @@ function App() {
   const handleUpscale = () => runQuickAction('Upscale the image to 2x its original resolution, significantly enhancing details, sharpness, and overall quality for a professional, high-definition result.');
   const handleBlurBackground = () => runQuickAction('Apply a subtle, photorealistic blur to the background, keeping the main subject in sharp focus (bokeh effect).');
   const handleApplyFrame = (framePrompt: string) => runQuickAction(framePrompt);
+  const handleApplyFilter = (filterPrompt: string) => runQuickAction(filterPrompt);
 
 
   return (
@@ -125,6 +126,7 @@ function App() {
                 onUpscale={handleUpscale}
                 onBlurBackground={handleBlurBackground}
                 onApplyFrame={handleApplyFrame}
+                onApplyFilter={handleApplyFilter}
                 isLoading={isLoading}
                 history={history}
                 onHistoryClick={handleHistoryClick}
